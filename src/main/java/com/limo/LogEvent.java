@@ -3,7 +3,7 @@ package com.limo;
 import java.net.InetSocketAddress;
 
 public class LogEvent {
-    private static final byte SEPARATOR=(byte) ':';
+    public static final byte SEPARATOR=(byte) ':';
     private final InetSocketAddress source;
     private final String logfile;
     private final String msg;
@@ -26,6 +26,10 @@ public class LogEvent {
 
     public String getLogfile(){
         return logfile;
+    }
+
+    public String getMsg() {
+        return msg;
     }
 
     private long getReceivedTimestamp(){

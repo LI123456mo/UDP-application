@@ -11,12 +11,12 @@ import java.io.File;
 import java.io.RandomAccessFile;
 import java.net.InetSocketAddress;
 
-public class LogEventBroadCaster {
+public class LogEventBroadcaster {
     private final EventLoopGroup group;
     private final Bootstrap bootstrap;
     private final File file;
 
-    public LogEventBroadCaster (InetSocketAddress address, File file) {
+    public LogEventBroadcaster(InetSocketAddress address, File file) {
         group = new NioEventLoopGroup();
         bootstrap = new Bootstrap();
         bootstrap.group(group).channel(NioDatagramChannel.class)
@@ -59,7 +59,7 @@ public class LogEventBroadCaster {
             throw new IllegalArgumentException();
         }
 
-        LogEventBroadCaster broadCaster=new LogEventBroadCaster(
+        LogEventBroadcaster broadCaster=new LogEventBroadcaster(
                 new InetSocketAddress("255.255.255.255",Integer.parseInt(args[0])),
                 new File(args[1]));
 

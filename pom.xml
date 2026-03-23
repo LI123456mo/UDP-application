@@ -9,8 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -24,9 +23,9 @@
 
     <profiles>
         <profile>
-            <id>Broadcaster</id>
+            <id>LogEventBroadcaster</id>
             <properties>
-                <mainClass>com.limo.udp.LogEventBroadcaster</mainClass>
+                <mainClass>com.limo.LogEventBroadcaster</mainClass>
                 <port>9999</port>
                 <logfile>log.txt</logfile>
             </properties>
@@ -36,34 +35,21 @@
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
                         <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                         <configuration>
-                            <mainClass>${mainClass}</mainClass>
+                            <executable>java</executable>
                             <arguments>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>${mainClass}</argument>
                                 <argument>${port}</argument>
                                 <argument>${logfile}</argument>
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>Monitor</id>
-            <properties>
-                <mainClass>com.limo.udp.LogEventMonitor</mainClass>
-                <port>9999</port>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <configuration>
-                            <mainClass>${mainClass}</mainClass>
-                            <arguments>
-                                <argument>${port}</argument>
                             </arguments>
                         </configuration>
                     </plugin>
